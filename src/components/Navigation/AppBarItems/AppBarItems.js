@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  item: {
+    marginRight: theme.spacing(2),
+  },
 }));
 
 const AppBarItems = (props) => {
@@ -21,6 +24,12 @@ const AppBarItems = (props) => {
     <Aux>
       <Typography variant="h6" className={classes.title}>
         Yet Another Book Search
+      </Typography>
+      <Typography variant="subtitle1" className={classes.item}>
+        Search
+      </Typography>
+      <Typography variant="subtitle1" className={classes.item}>
+        Saved Search
       </Typography>
     </Aux>
   );
