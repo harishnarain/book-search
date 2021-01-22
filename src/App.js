@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 
-function App() {
+import Layout from "./containers/Layout/Layout";
+import Main from "./containers/Main/Main";
+
+const Mock = React.lazy(() => {
+  return import("./containers/Mock/Mock");
+});
+
+const App = (props) => {
+  let routes = (
+    <Switch>
+      <Route path="/mock" component={Mock} />
+      <Route path="/" exact component={Main} />
+      <Redirect to="/" />
+    </Switch>
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Layout>
+        <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+      </Layout>
     </div>
   );
-}
+};
 
-export default App;
+export default withRouter(App);
