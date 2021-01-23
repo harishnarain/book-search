@@ -1,6 +1,6 @@
 import React from "react";
+import Link from "@material-ui/core/Link";
 
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Aux from "../../../hoc/Aux/Aux";
@@ -22,15 +22,25 @@ const AppBarItems = (props) => {
 
   return (
     <Aux>
-      <Typography variant="h6" className={classes.title}>
+      <Link variant="h6" className={classes.title} href="/" color="inherit">
         Yet Another Book Search
-      </Typography>
-      <Typography variant="subtitle1" className={classes.item}>
+      </Link>
+      <Link
+        variant="subtitle1"
+        className={classes.item}
+        href="/"
+        color="inherit"
+      >
         Search
-      </Typography>
-      <Typography variant="subtitle1" className={classes.item}>
+      </Link>
+      <Link
+        variant="subtitle1"
+        className={classes.item}
+        href="/saved-search"
+        color="inherit"
+      >
         Saved Search
-      </Typography>
+      </Link>
     </Aux>
   );
 };
