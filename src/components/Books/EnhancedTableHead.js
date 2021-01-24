@@ -38,6 +38,12 @@ const headCells = [
     disablePadding: true,
     label: "Link",
   },
+  {
+    id: "actions",
+    numeric: false,
+    disablePadding: true,
+    label: "Actions",
+  },
 ];
 
 const EnhancedTableHead = (props) => {

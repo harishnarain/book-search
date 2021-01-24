@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import SaveAlt from "@material-ui/icons/SaveAlt";
 
 import Aux from "../../hoc/Aux/Aux";
 
@@ -62,9 +63,9 @@ const useToolbarStyles = makeStyles((theme) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "30ch",
       "&:focus": {
-        width: "20ch",
+        width: "40ch",
       },
     },
   },
@@ -72,10 +73,26 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
+  const { numSelected } = props;
 
   return (
-    <Toolbar className={clsx(classes.root)}>
-      {
+    <Toolbar
+      className={clsx(classes.root, {
+        [classes.highlight]: numSelected > 0,
+      })}
+    >
+      {numSelected > 0 ? (
+        <Aux>
+          <Typography
+            className={classes.title}
+            color="inherit"
+            variant="subtitle1"
+            component="div"
+          >
+            {numSelected} selected
+          </Typography>
+        </Aux>
+      ) : (
         <Aux>
           <Typography
             className={classes.title}
@@ -86,25 +103,35 @@ const EnhancedTableToolbar = (props) => {
             Books
           </Typography>
         </Aux>
-      }
+      )}
 
-      <Aux>
-        <div className={classes.action}>
-          <div className={classes.actionIcon}>
-            <SearchIcon />
+      {numSelected > 0 ? (
+        <Aux>
+          <Tooltip title="Save">
+            <IconButton aria-label="delete" onClick={props.saveBook}>
+              <SaveAlt />
+            </IconButton>
+          </Tooltip>
+        </Aux>
+      ) : (
+        <Aux>
+          <div className={classes.action}>
+            <div className={classes.actionIcon}>
+              <SearchIcon />
+            </div>
           </div>
-        </div>
-        <InputBase
-          placeholder="Search"
-          value={props.value}
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          inputProps={{ "aria-label": "search" }}
-          onChange={props.changed}
-        />
-      </Aux>
+          <InputBase
+            placeholder="Search"
+            value={props.value}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
+            onChange={props.changed}
+          />
+        </Aux>
+      )}
     </Toolbar>
   );
 };

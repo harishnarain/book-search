@@ -11,7 +11,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import bookReducer from "./store/reducers/book";
-import { watchBook } from "./store/sagas/index";
+import { watchBook, watchSaved } from "./store/sagas/index";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -31,6 +31,7 @@ export const store = createStore(
 );
 
 sagaMiddleware.run(watchBook);
+sagaMiddleware.run(watchSaved);
 
 ReactDOM.render(
   <Provider store={store}>

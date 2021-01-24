@@ -72,7 +72,7 @@ const Books = (props) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = props.books.map((book) => book);
+      const newSelecteds = props.books.map((book) => book.id);
       setSelected(newSelecteds);
       return;
     }
@@ -108,6 +108,11 @@ const Books = (props) => {
     setPage(0);
   };
 
+  const handleSaveBook = (books) => {
+    console.log(books);
+    setSelected([]);
+  };
+
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const emptyRows =
@@ -127,13 +132,16 @@ const Books = (props) => {
         {stableSort(props.books, getComparator(order, orderBy))
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((book, index) => {
-            const isItemSelected = isSelected(book);
+            const isItemSelected = isSelected(book.id);
             const labelId = `enhanced-table-checkbox-${index}`;
+
+            const thumbnail = book.volumeInfo.imageLinks
+              ? book.volumeInfo.imageLinks.smallThumbnail
+              : "https://place-hold.it/150";
 
             return (
               <TableRow
                 hover
-                onClick={(event) => handleClick(event, book.id)}
                 role="checkbox"
                 aria-checked={isItemSelected}
                 tabIndex={-1}
@@ -144,7 +152,7 @@ const Books = (props) => {
                   <Checkbox
                     checked={isItemSelected}
                     inputProps={{ "aria-labelledby": labelId }}
-                    onClick={(event) => handleClick(event, book)}
+                    onClick={(event) => handleClick(event, book.id)}
                   />
                 </TableCell>
                 <Book
@@ -153,8 +161,9 @@ const Books = (props) => {
                   title={book.volumeInfo.title}
                   authors={book.volumeInfo.authors}
                   description={book.volumeInfo.description}
-                  thumbnail={book.volumeInfo.imageLinks.smallThumbnail}
-                  link={book.volumeInfo.infoLink}
+                  thumbnail={thumbnail}
+                  link={book.volumeInfo.previewLink}
+                  saveBook={() => handleSaveBook([book.id])}
                 />
               </TableRow>
             );
@@ -176,6 +185,7 @@ const Books = (props) => {
           changed={(event) => setQuery(event.target.value)}
           deleteClick={() => {}}
           value={query}
+          saveBook={() => handleSaveBook(selected)}
         />
         <TableContainer>
           <Table
