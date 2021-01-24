@@ -5,10 +5,12 @@ import Link from "@material-ui/core/Link";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import Aux from "../../../hoc/Aux/Aux";
 
 const book = (props) => {
+  const { mode } = props;
   let trimmedDescription = "";
 
   trimmedDescription = props.description
@@ -40,11 +42,19 @@ const book = (props) => {
         <Link href={props.link}>Access Link</Link>
       </TableCell>
       <TableCell align="center" padding="default">
-        <Tooltip title="Save book">
-          <IconButton aria-label="save" onClick={props.saveBook}>
-            <SaveAltIcon color="primary" />
-          </IconButton>
-        </Tooltip>
+        {mode === "delete" ? (
+          <Tooltip title="Delete book">
+            <IconButton aria-label="delete" onClick={props.deleteBook}>
+              <DeleteIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Save book">
+            <IconButton aria-label="save" onClick={props.saveBook}>
+              <SaveAltIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+        )}
       </TableCell>
     </Aux>
   );

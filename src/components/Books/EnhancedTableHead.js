@@ -11,37 +11,37 @@ const headCells = [
   {
     id: "image",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Image",
   },
   {
     id: "title",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Title",
   },
   {
     id: "authors",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Authors",
   },
   {
     id: "description",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Description",
   },
   {
     id: "link",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Link",
   },
   {
     id: "actions",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Actions",
   },
 ];

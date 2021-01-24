@@ -11,6 +11,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import bookReducer from "./store/reducers/book";
+import savedReducer from "./store/reducers/saved";
 import { watchBook, watchSaved } from "./store/sagas/index";
 
 const composeEnhancers =
@@ -21,6 +22,7 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   //auth: authReducer,
   book: bookReducer,
+  saved: savedReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

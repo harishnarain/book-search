@@ -9,6 +9,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import SaveAlt from "@material-ui/icons/SaveAlt";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import Aux from "../../hoc/Aux/Aux";
 
@@ -74,6 +75,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
+  const { mode } = props;
 
   return (
     <Toolbar
@@ -107,11 +109,19 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Aux>
-          <Tooltip title="Save">
-            <IconButton aria-label="delete" onClick={props.saveBook}>
-              <SaveAlt />
-            </IconButton>
-          </Tooltip>
+          {mode === "delete" ? (
+            <Tooltip title="Delete">
+              <IconButton aria-label="delete" onClick={props.deleteBook}>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Save">
+              <IconButton aria-label="save" onClick={props.saveBook}>
+                <SaveAlt />
+              </IconButton>
+            </Tooltip>
+          )}
         </Aux>
       ) : (
         <Aux>

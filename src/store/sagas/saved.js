@@ -19,3 +19,37 @@ export function* fetchSavedSaga(action) {
     yield put(actions.fetchSavedFail(error));
   }
 }
+
+export function* deleteSavedSaga(action) {
+  yield put(actions.deleteSavedStart());
+  try {
+    for (let book in action.books) {
+      // eslint-disable-next-line
+      const response = yield axios.delete("/" + action.books[book].id);
+    }
+
+    yield put(actions.deleteSavedSuccess());
+  } catch (error) {
+    yield put(actions.deleteSavedFail(error));
+  }
+}
+
+export function* addSavedSaga(action) {
+  yield put(actions.addSavedStart());
+  try {
+    for (let book in action.books) {
+      const addedBook = {
+        bookId: book.bookId,
+        title: book.title,
+        description: book.description,
+        authors: book.authors,
+        image: book.image,
+        link: book.link,
+      };
+      yield axios.post("/", addedBook);
+      yield put(actions.addSavedSuccess());
+    }
+  } catch (error) {
+    yield put(actions.addSavedFail(error));
+  }
+}

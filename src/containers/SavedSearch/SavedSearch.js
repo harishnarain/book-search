@@ -72,7 +72,7 @@ const SavedSearch = (props) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = props.books.map((book) => book.id);
+      const newSelecteds = props.books.map((book) => book._id);
       setSelected(newSelecteds);
       return;
     }
@@ -108,7 +108,7 @@ const SavedSearch = (props) => {
     setPage(0);
   };
 
-  const handleSaveBook = (books) => {
+  const handleDeleteBook = (books) => {
     console.log(books);
     setSelected([]);
   };
@@ -132,11 +132,11 @@ const SavedSearch = (props) => {
         {stableSort(props.books, getComparator(order, orderBy))
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((book, index) => {
-            const isItemSelected = isSelected(book.id);
+            const isItemSelected = isSelected(book._id);
             const labelId = `enhanced-table-checkbox-${index}`;
 
-            const thumbnail = book.volumeInfo.imageLinks
-              ? book.volumeInfo.imageLinks.smallThumbnail
+            const thumbnail = book.image
+              ? book.image
               : "https://place-hold.it/150";
 
             return (
@@ -145,25 +145,26 @@ const SavedSearch = (props) => {
                 role="checkbox"
                 aria-checked={isItemSelected}
                 tabIndex={-1}
-                key={book.id}
+                key={book._id}
                 selected={isItemSelected}
               >
                 <TableCell padding="checkbox">
                   <Checkbox
                     checked={isItemSelected}
                     inputProps={{ "aria-labelledby": labelId }}
-                    onClick={(event) => handleClick(event, book.id)}
+                    onClick={(event) => handleClick(event, book._id)}
                   />
                 </TableCell>
                 <Book
-                  id={book.id}
+                  id={book._id}
                   labelId={labelId}
-                  title={book.volumeInfo.title}
-                  authors={book.volumeInfo.authors}
-                  description={book.volumeInfo.description}
+                  title={book.title}
+                  authors={book.authors}
+                  description={book.description}
                   thumbnail={thumbnail}
-                  link={book.volumeInfo.previewLink}
-                  saveBook={() => handleSaveBook([book.id])}
+                  link={book.link}
+                  mode="delete"
+                  deleteBook={() => handleDeleteBook([book._id])}
                 />
               </TableRow>
             );
@@ -185,7 +186,8 @@ const SavedSearch = (props) => {
           changed={(event) => setQuery(event.target.value)}
           deleteClick={() => {}}
           value={query}
-          saveBook={() => handleSaveBook(selected)}
+          mode="delete"
+          deleteBook={() => handleDeleteBook(selected)}
         />
         <TableContainer>
           <Table
@@ -223,9 +225,9 @@ const SavedSearch = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    books: state.book.books,
-    loading: state.book.loading,
-    error: state.book.error,
+    books: state.saved.books,
+    loading: state.saved.loading,
+    error: state.saved.error,
   };
 };
 

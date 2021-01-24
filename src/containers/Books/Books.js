@@ -163,6 +163,7 @@ const Books = (props) => {
                   description={book.volumeInfo.description}
                   thumbnail={thumbnail}
                   link={book.volumeInfo.previewLink}
+                  mode="save"
                   saveBook={() => handleSaveBook([book.id])}
                 />
               </TableRow>
@@ -185,6 +186,7 @@ const Books = (props) => {
           changed={(event) => setQuery(event.target.value)}
           deleteClick={() => {}}
           value={query}
+          mode="save"
           saveBook={() => handleSaveBook(selected)}
         />
         <TableContainer>
