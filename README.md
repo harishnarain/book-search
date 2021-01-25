@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Book Search - Yet another book search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Available Scripts
+For this assignment, we create a Google Books search with React. This is meant to be a full stack app which has an accompanying CRUD API for managing saved searches. The accompanying API is in a separate repository.
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Book Search - Yet another book search](#book-search---yet-another-book-search)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Features](#features)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Screenshots](#screenshots)
+  - [Questions](#questions)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Deploy saved book search API from repository: https://github.com/harishnarain/saved-book-search-api
 
-### `npm test`
+2. Clone this GitHub repository
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```
+   git@github.com:harishnarain/book-search.git
+   ```
 
-### `npm run build`
+3. Install all dependent npm packages
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```
+   npm install --save
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Run the development server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```
+   npm start
+   ```
 
-### `npm run eject`
+5. If deploying to a hosting platform follow the instructions of that platform for deploying React apps
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Usage
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. In search input box type in search criteria
+2. Navigate the pagination
+3. Click save icon to save a single book or select multiple results and click save in the toolbar to save multiple results.
+4. Click Saved Search from Navigation Bar
+5. Click delete icon to delete single search result or select multiple results and click delete in toolbar to delete multiple results.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+A demo of the application is available at: https://thawing-stream-76923.herokuapp.com/
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Features
 
-## Learn More
+- Debounced search queries
+- Sorting in ascending or descending order
+- Enhanced pagination with ability to select rows per page
+- Shared state management with Redux
+- Asynchronous data fetching provided by Redux-Saga
+- Using purely functional components and React Hooks
+- Using Material-UI
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project uses the MIT license
 
-### Code Splitting
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Pull requests are welcome
 
-### Analyzing the Bundle Size
+## Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Home Page**
 
-### Making a Progressive Web App
+![BookSearch1](https://github.com/harishnarain/book-search/blob/main/booksearch1.png?raw=true)
+![BookSearch2](https://github.com/harishnarain/book-search/blob/main/booksearch2.png?raw=true)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Questions
 
-### Advanced Configuration
+Checkout my GitHub [profile](https://github.com/harishnarain)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please feel free to email at: <harishnarain@gmail.com>
