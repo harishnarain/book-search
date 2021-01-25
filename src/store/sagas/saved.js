@@ -23,10 +23,13 @@ export function* fetchSavedSaga(action) {
 export function* deleteSavedSaga(action) {
   yield put(actions.deleteSavedStart());
   try {
-    for (let book in action.books) {
-      // eslint-disable-next-line
-      const response = yield axios.delete("/" + action.books[book].id);
-    }
+    yield action.books.forEach((book) => {
+      axios.delete("/" + book);
+    });
+    // for (let book in action.books) {
+    //   // eslint-disable-next-line
+    //   const response = yield axios.delete("/" + action.books[book].id);
+    // }
 
     yield put(actions.deleteSavedSuccess());
   } catch (error) {

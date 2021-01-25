@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SavedSearch = (props) => {
-  const { onFetchSaved } = props;
+  const { onFetchSaved, onDeleteSaved } = props;
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("displayName");
@@ -109,8 +109,9 @@ const SavedSearch = (props) => {
   };
 
   const handleDeleteBook = (books) => {
-    console.log(books);
+    onDeleteSaved(books);
     setSelected([]);
+    window.location.reload(false);
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
@@ -228,6 +229,7 @@ const mapStateToProps = (state) => {
     books: state.saved.books,
     loading: state.saved.loading,
     error: state.saved.error,
+    deleted: state.saved.deleted,
   };
 };
 
@@ -236,6 +238,7 @@ const mapDispatchToProps = (dispatch) => {
     onFetchSaved: (queryType, query) =>
       dispatch(actions.fetchSaved(queryType, query)),
     onClearSavedState: () => dispatch(actions.clearSavedState()),
+    onDeleteSaved: (book) => dispatch(actions.deleteSaved(book)),
   };
 };
 
