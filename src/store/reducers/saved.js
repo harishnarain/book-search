@@ -69,7 +69,6 @@ const clearSavedState = (state, action) => {
   return updateObject(state, {
     error: null,
     added: false,
-    updated: false,
   });
 };
 

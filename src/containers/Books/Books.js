@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Books = (props) => {
-  const { onFetchBooks } = props;
+  const { onFetchBooks, onAddSaved } = props;
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("displayName");
@@ -109,7 +109,26 @@ const Books = (props) => {
   };
 
   const handleSaveBook = (books) => {
-    console.log(books);
+    const booksToSave = [];
+    books.forEach((book) => {
+      const bookToSave = props.books.find((propBook) => propBook.id === book);
+      const formattedBookToSave = {
+        bookId: bookToSave.id,
+        title: bookToSave.volumeInfo.title,
+        description: bookToSave.volumeInfo.description
+          ? bookToSave.volumeInfo.description
+          : null,
+        authors: bookToSave.volumeInfo.authors
+          ? bookToSave.volumeInfo.authors
+          : null,
+        image: bookToSave.volumeInfo.imageLinks
+          ? bookToSave.volumeInfo.imageLinks.smallThumbnail
+          : "https://place-hold.it/150",
+        link: bookToSave.volumeInfo.previewLink,
+      };
+      booksToSave.push(formattedBookToSave);
+    });
+    onAddSaved(booksToSave);
     setSelected([]);
   };
 
@@ -228,6 +247,8 @@ const mapStateToProps = (state) => {
     books: state.book.books,
     loading: state.book.loading,
     error: state.book.error,
+    added: state.saved.added,
+    savedError: state.saved.error,
   };
 };
 
@@ -236,6 +257,8 @@ const mapDispatchToProps = (dispatch) => {
     onFetchBooks: (queryType, query) =>
       dispatch(actions.fetchBooks(queryType, query)),
     onClearBookState: () => dispatch(actions.clearBookState()),
+    onAddSaved: (book) => dispatch(actions.addSaved(book)),
+    onClearSavedState: () => dispatch(actions.clearSavedState()),
   };
 };
 

@@ -37,18 +37,11 @@ export function* deleteSavedSaga(action) {
 export function* addSavedSaga(action) {
   yield put(actions.addSavedStart());
   try {
-    for (let book in action.books) {
-      const addedBook = {
-        bookId: book.bookId,
-        title: book.title,
-        description: book.description,
-        authors: book.authors,
-        image: book.image,
-        link: book.link,
-      };
-      yield axios.post("/", addedBook);
-      yield put(actions.addSavedSuccess());
-    }
+    yield action.book.forEach((book) => {
+      console.log(book);
+      axios.post("/", book);
+      put(actions.addSavedSuccess());
+    });
   } catch (error) {
     yield put(actions.addSavedFail(error));
   }
