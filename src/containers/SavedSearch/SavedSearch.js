@@ -111,7 +111,6 @@ const SavedSearch = (props) => {
   const handleDeleteBook = (books) => {
     onDeleteSaved(books);
     setSelected([]);
-    window.location.reload(false);
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
