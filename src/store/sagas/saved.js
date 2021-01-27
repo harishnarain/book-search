@@ -30,8 +30,16 @@ export function* deleteSavedSaga(action) {
     //   // eslint-disable-next-line
     //   const response = yield axios.delete("/" + action.books[book].id);
     // }
-
-    yield put(actions.deleteSavedSuccess());
+    const response = yield axios.get();
+    const fetchedBooks = [];
+    for (let key in response.data) {
+      if (!action.books.includes(response.data[key]._id)) {
+        fetchedBooks.push({
+          ...response.data[key],
+        });
+      }
+    }
+    yield put(actions.deleteSavedSuccess(fetchedBooks));
   } catch (error) {
     yield put(actions.deleteSavedFail(error));
   }
@@ -41,7 +49,6 @@ export function* addSavedSaga(action) {
   yield put(actions.addSavedStart());
   try {
     yield action.book.forEach((book) => {
-      console.log(book);
       axios.post("/", book);
       put(actions.addSavedSuccess());
     });

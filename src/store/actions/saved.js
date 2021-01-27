@@ -35,9 +35,10 @@ export const deleteSaved = (books) => {
   };
 };
 
-export const deleteSavedSuccess = () => {
+export const deleteSavedSuccess = (books) => {
   return {
     type: actionTypes.DELETE_SAVED_SUCCESS,
+    books: books,
   };
 };
 

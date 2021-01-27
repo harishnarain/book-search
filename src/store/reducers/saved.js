@@ -32,6 +32,7 @@ const deleteSavedSuccess = (state, action) => {
   return updateObject(state, {
     loading: false,
     deleted: true,
+    books: action.books,
   });
 };
 
